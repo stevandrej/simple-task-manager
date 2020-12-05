@@ -1,4 +1,5 @@
 export const ADD_CARD = 'ADD_CARD';
+export const SET_CARDS = 'SET_CARDS';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const ACTIVE_CARD = 'ACTIVE_CARD';
 export const COMPLETED_BUTTON = 'COMPLETED_BUTTON';
@@ -6,3 +7,5 @@ export const UNDO_COMPLETED_BUTTON = 'UNDO_COMPLETED_BUTTON';
 export const EDIT_BUTTON = 'EDIT_BUTTON';
 export const UPDATE_BUTTON = 'UPDATE_BUTTON';
 export const DELETE_BUTTON = 'DELETE_BUTTON';
+export const LOGIN = 'LOGIN';
+export const LOGOUT ='LOGOUT';

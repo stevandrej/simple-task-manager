@@ -5,36 +5,44 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import UndoIcon from '@material-ui/icons/Undo';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { completedButton, deleteButton, editButton, undoCompletedButton } from '../../redux/actions/cardActions';
+import { startCompletedButton, startDeleteButton, editButton, startUndoCompletedButton } from '../../redux/actions/cardActions';
 
 const CardItem = (props) => {
 
 	const dispatch = useDispatch()
 
 	const handleCompletedButton = () => {
-		dispatch(completedButton({
-			index: props.itemNo
+		dispatch(startCompletedButton({
+			listName: props.listName,
+			index: props.itemNo,
+			id: props.id,
+			card: props.card
 		}))
 	}
 
 	const handleUndoCompleted = () => {
-		dispatch(undoCompletedButton({
-			index: props.itemNo
+		dispatch(startUndoCompletedButton({
+			listName: props.listName,
+			index: props.itemNo,
+			id: props.id,
+			card: props.card
 		}))
 	}
 
 	const handleEditButton = () => {
 		dispatch(editButton({
 			index: props.itemNo,
-			listName: props.listName
+			listName: props.listName,
+			id: props.id
 		})
 		);
 	}
 
 	const handleDeleteButton = () => {
-		dispatch(deleteButton({
+		dispatch(startDeleteButton({
 			listName: props.listName,
-			index: props.itemNo
+			index: props.itemNo,
+			id: props.id
 		})
 		)
 	}

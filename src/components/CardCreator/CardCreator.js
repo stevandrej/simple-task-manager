@@ -1,7 +1,7 @@
 import { Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addCard } from '../../redux/actions/cardActions';
+import { startAddCard } from '../../redux/actions/cardActions';
 
 const CardCreator = () => {
 
@@ -18,8 +18,8 @@ const CardCreator = () => {
 	}
 
 	const handleAddCard = () => {
+		dispatch(startAddCard({ title, content }))
 		if (title || content) {
-			dispatch(addCard({ title, content }))
 			setTitle('');
 			setContent('')
 		}

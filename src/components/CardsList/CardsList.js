@@ -7,13 +7,16 @@ const CardsList = (props) => {
 	function render() {
 		return (
 			props.cards ?
-				props.cards.map((card, index) => <ListItem key={props.listName + index} ><CardItem card={card} itemNo={index} listName={props.listName} key={`card${index}`}/></ListItem>
+				props.cards.map((card, index) => {
+					const { id, ...theCard } = card;
+					return <ListItem key={props.listName + index} ><CardItem card={theCard} id={card.id} itemNo={index} listName={props.listName} key={`card${index}`} /></ListItem>
+				}
 				) : ''
 		);
 	}
 
 	return (
-		<List style={{overflowY: 'auto' , 'height': '100vh'}}>
+		<List style={{ overflowY: 'auto'}}>
 			{render()}
 		</List>
 	)

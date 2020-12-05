@@ -1,36 +1,38 @@
-import { Container, Grid, Typography } from '@material-ui/core';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import './App.css';
-import CardCreator from './components/CardCreator/CardCreator';
-import CardsList from './components/CardsList/CardsList';
-import EditModal from './components/EditModal/EditModal';
+import { Switch, Route } from 'react-router-dom';
+import { firebase } from './firebase/firebase';
+import Dashboard from './components/DashBoard/Dashboard';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import Login from './components/Login/Login';
+import { useDispatch } from 'react-redux';
+import { login, logout } from './redux/actions/authActions';
+import { history } from './index';
+import { PrivateRoute } from './router/PrivateRoute';
+import { PublicRoute } from './router/PublicRoute';
 
 function App() {
 
-	const activeCardsList = useSelector(state => state.cardReducer.activeCardsList);
-	const completedCardsList = useSelector(state => state.cardReducer.completedCardsList);
+	const dispatch = useDispatch();
+
+	firebase.auth().onAuthStateChanged( (user) => {
+		if (user) {
+			dispatch(login(user.uid));
+			if (history.location.pathname === '/') {
+				history.push('/dashboard');
+			}
+		}
+		else {
+			dispatch(logout());
+			history.push('/');
+		}
+	});
 
 	return (
-		<React.Fragment>
-			<EditModal />
-			<Container>
-				<Grid container spacing={3} >
-					<Grid item md sm={4} xs={12}>
-						<Typography align='center' color='textPrimary' variant='button' display='block'>Add task:</Typography>
-						<CardCreator />
-					</Grid>
-					<Grid item md sm={4} xs={12}>
-						<Typography align='center' color='textPrimary' variant='h6'>Active tasks:</Typography>
-						<CardsList cards={activeCardsList} listName='active' />
-					</Grid>
-					<Grid item md sm={4} xs={12}>
-						<Typography align='center' color='textPrimary' variant='h6'>Completed tasks:</Typography>
-						<CardsList cards={completedCardsList} listName='completed' />
-					</Grid>
-				</Grid>
-			</Container>
-		</React.Fragment>
+		<Switch>
+			<PublicRoute path={['/', '/simple-task-manager']} exact component={Login} />
+			<PrivateRoute path='/dashboard' component={Dashboard} />
+			<Route component={NotFoundPage} />
+		</Switch>
 	);
 }
 

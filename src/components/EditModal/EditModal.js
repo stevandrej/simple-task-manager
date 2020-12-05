@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Backdrop, TextField, Dialog, DialogContent, DialogTitle, DialogActions, Button } from '@material-ui/core';
-import { toggleModal, setActiveCard, updateButton } from '../../redux/actions/cardActions';
+import { toggleModal, setActiveCard, startUpdateButton } from '../../redux/actions/cardActions';
 
 const EditModal = () => {
 
@@ -30,7 +30,8 @@ const EditModal = () => {
 
 	const handleUpdate = () => {
 
-		dispatch(updateButton({
+		dispatch(startUpdateButton({
+			id: activeCard.id,
 			index: activeCard.index,
 			status: activeCard.listName,
 			title: updatedTitle,
