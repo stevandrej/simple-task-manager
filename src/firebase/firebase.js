@@ -1,4 +1,6 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';        // for authentication
+import 'firebase/database'; // If using Firebase database
 
 const firebaseConfig = {
 	apiKey: "AIzaSyBr5-TR1jdUHXuFj2ddbd6PY-F9FQf7Y_A",
@@ -13,9 +15,11 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 const provider = new firebase.auth.GoogleAuthProvider();
+
 provider.setCustomParameters({
 	prompt: 'select_account'
-  })
+})
 
 export { firebase, database, provider };

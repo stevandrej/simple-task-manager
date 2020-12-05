@@ -13,7 +13,7 @@ export const login = (uid) => {
 };
 
 export const startLogout = () => {
-	return async () => await firebase.auth().signOut().then( console.log('sigh-out successfull') ).catch( error => { alert( 'problem with sign out: ', error)});
+	return async () => await firebase.auth().signOut().catch( error => { alert( 'problem with sign out: ', error)});
 };
 
 export const logout = () => {

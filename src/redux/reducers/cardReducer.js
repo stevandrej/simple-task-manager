@@ -134,6 +134,12 @@ const cardReducer = (state = initState, action) => {
 				}
 			}
 			else return state;
+		
+		//Clear redux so that when new user logs in, does not see previous user cards before they refresh 
+		case actionTypes.LOGOUT:
+			return {
+				...initState
+			}
 		default:
 			return state;
 	}

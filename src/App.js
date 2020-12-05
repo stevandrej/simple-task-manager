@@ -14,7 +14,7 @@ function App() {
 
 	const dispatch = useDispatch();
 
-	firebase.auth().onAuthStateChanged( (user) => {
+	firebase.auth().onAuthStateChanged((user) => {
 		if (user) {
 			dispatch(login(user.uid));
 			if (history.location.pathname === '/') {
