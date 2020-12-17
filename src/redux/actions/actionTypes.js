@@ -8,4 +8,5 @@ export const EDIT_BUTTON = 'EDIT_BUTTON';
 export const UPDATE_BUTTON = 'UPDATE_BUTTON';
 export const DELETE_BUTTON = 'DELETE_BUTTON';
 export const LOGIN = 'LOGIN';
-export const LOGOUT ='LOGOUT';
+export const LOGOUT = 'LOGOUT';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';

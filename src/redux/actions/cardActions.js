@@ -55,7 +55,7 @@ export const addCard = (payload) => {
 }
 
 export const startAddCard = (payloadData = {}) => {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
         const uid = getState().authReducer.uid;
         let payload = {
             title: payloadData.title,
@@ -63,14 +63,12 @@ export const startAddCard = (payloadData = {}) => {
             status: 'active'
         };
 
-        return database.ref(`users/${uid}/active`).push(payload).then((ref) => {
-            payload = {
-                ...payload,
-                id: ref.key
-            }
-        }).then(() => {
-            dispatch(addCard(payload))
-        })
+        const ref = await database.ref(`users/${uid}/active`).push(payload);
+        payload = {
+            ...payload,
+            id: ref.key
+        };
+        dispatch(addCard(payload));
     }
 }
 

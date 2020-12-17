@@ -5,7 +5,7 @@ import { Box, Button, CircularProgress, Container, Grid, Typography } from '@mat
 import EditModal from '../EditModal/EditModal';
 import CardCreator from '../CardCreator/CardCreator';
 import CardsList from '../CardsList/CardsList';
-import { logout, startLogout } from '../../redux/actions/authActions';
+import { logout, startDeleteAccount, startLogout } from '../../redux/actions/authActions';
 
 
 const Dashboard = () => {
@@ -25,11 +25,18 @@ const Dashboard = () => {
 		dispatch(logout())
 	}
 
+	function initiateDeleteUser() {
+		dispatch(startDeleteAccount());
+	}
+
 	return (
 		<React.Fragment>
 			<EditModal />
 			<Box style={{padding: '10px 20px', display:'flex', justifyContent: 'flex-end'}}>
 				<Button variant="contained" color="primary" onClick={initiateLogout} >Log out</Button>
+			</Box>
+			<Box style={{padding: '10px 20px', display:'flex', justifyContent: 'flex-end'}}>
+				<Button variant="contained" color="primary" onClick={initiateDeleteUser} >Delete account</Button>
 			</Box>
 			<Container>
 				<Grid container spacing={3} >
